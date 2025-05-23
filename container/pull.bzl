@@ -83,6 +83,12 @@ _container_pull_attrs = {
         cfg = "host",
         doc = "(optional) Exposed to provide a way to test other pullers on Linux",
     ),
+    "puller_linux_riscv64": attr.label(
+        executable = True,
+        default = Label("@go_puller_linux_riscv64//file:downloaded"),
+        cfg = "host",
+        doc = "(optional) Exposed to provide a way to test other pullers on Linux",
+    ),
     "registry": attr.string(
         mandatory = True,
         doc = "The registry from which we are pulling.",
@@ -118,6 +124,8 @@ def _impl(repository_ctx):
             puller = repository_ctx.attr.puller_linux_arm64
         elif arch == "s390x":
             puller = repository_ctx.attr.puller_linux_s390x
+	elif arch == "riscv64":
+            puller = repository_ctx.attr.puller_linux_riscv64
 
     args = [
         repository_ctx.path(puller),
