@@ -42,7 +42,7 @@ container_import(
             loader = repository_ctx.attr._loader_linux_arm64
         elif arch == "s390x":
             loader = repository_ctx.attr._loader_linux_s390x
-	elif arch == "riscv64":
+        elif arch == "riscv64":
             loader = repository_ctx.attr._loader_linux_riscv64
 
     result = repository_ctx.execute([
