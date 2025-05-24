@@ -124,7 +124,7 @@ def _impl(repository_ctx):
             puller = repository_ctx.attr.puller_linux_arm64
         elif arch == "s390x":
             puller = repository_ctx.attr.puller_linux_s390x
-	elif arch == "riscv64":
+        elif arch == "riscv64":
             puller = repository_ctx.attr.puller_linux_riscv64
 
     args = [
