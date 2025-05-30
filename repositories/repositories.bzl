@@ -55,6 +55,15 @@ def repositories():
             sha256 = "a5527b7b3b4a266e4680a4ad8939429665d4173f26b35d5d317385134369e438",
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/puller-linux-s390x")],
         )
+    
+    if "go_puller_linux_riscv64" not in excludes:
+        http_file(
+            name = "go_puller_linux_riscv64",
+            executable = True,
+            sha256 = "04ae0656e352c69bad958d88644007f1ca0b0b884709c05e2ceb3dac4267a71c",
+            urls = [("https://github.com/Boring545/rules_docker/releases/download/v0.16.0/puller_linux_riscv64")],
+        )
+
 
     if "go_puller_darwin" not in excludes:
         http_file(
@@ -88,6 +97,14 @@ def repositories():
             urls = [("https://storage.googleapis.com/rules_docker/" + RULES_DOCKER_GO_BINARY_RELEASE + "/loader-linux-s390x")],
         )
 
+    if "loader_linux_riscv64" not in excludes:
+        http_file(
+            name = "loader_linux_riscv64",
+            executable = True,
+            sha256 = "8c9ac2e2aa34189dd936286ae6908426b8c9197d08f1d0d15897c53565fb1dd5",
+            urls = [("https://github.com/Boring545/rules_docker/releases/download/v0.16.0/loader_linux_riscv64")],
+        ) 
+
     if "loader_darwin" not in excludes:
         http_file(
             name = "loader_darwin",
@@ -111,9 +128,9 @@ def repositories():
     if "io_bazel_rules_go" not in excludes:
         http_archive(
             name = "io_bazel_rules_go",
-            sha256 = "bea456596a64c72125d1cbf81bca33bfe1a9ed7d00cc8aa800b945a47cf096b9",
+            sha256 = "54eeb60041e232285b118172ffbdd4c97b9b945971cca0290586dc15c0fd307a",
             urls = [
-                "https://github.com/Boring545/rules_go/releases/download/v0.46.0/rules_go-v0.46.0.zip",
+                "https://github.com/Boring545/rules_go/releases/download/v0.38.1/rules_go-v0.38.1.zip",
             ],
         )
     if "rules_python" not in excludes:
@@ -177,8 +194,8 @@ def repositories():
     if "bazel_gazelle" not in excludes:
         http_archive(
             name = "bazel_gazelle",
-            sha256 = "cdb02a887a7187ea4d5a27452311a75ed8637379a1287d8eeb952138ea485f7d",
-            urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.21.1/bazel-gazelle-v0.21.1.tar.gz"],
+            sha256 = "727f3e4edd96ea20c29e8c2ca9e8d2af724d8c7778e7923a854b2c80952bc405",
+            urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.30.0/bazel-gazelle-v0.30.0.tar.gz"],
         )
 
     if "rules_pkg" not in excludes:
