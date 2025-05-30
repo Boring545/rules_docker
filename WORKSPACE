@@ -13,6 +13,16 @@
 # limitations under the License.
 workspace(name = "io_bazel_rules_docker")
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "platforms",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/platforms/releases/download/1.0.0/platforms-1.0.0.tar.gz",
+        "https://github.com/bazelbuild/platforms/releases/download/1.0.0/platforms-1.0.0.tar.gz",
+    ],
+    sha256 = "3384eb1c30762704fbe38e440204e114154086c8fc8a8c2e3e28441028c019a8",
+)
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load(
     "//toolchains/docker:toolchain.bzl",
@@ -347,26 +357,14 @@ http_archive(
     sha256 = "10fffa29f687aa4d8eb6dfe8731ab5beb63811ab00981fc84a93899641fd4af1",
     urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.0.3/rules_nodejs-2.0.3.tar.gz"],
 )
-
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
-
-yarn_install(
-    name = "npm",
-    package_json = "//testdata:package.json",
-    symlink_node_modules = False,
-    yarn_lock = "//testdata:yarn.lock",
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+node_repositories(
+    vendored_node = "//nodejs:node_bin",
+    node_version = "20.11.1",
+    vendored_yarn = "//nodejs:yarn_bin",
+    yarn_version = "1.22.22",
 )
 
-load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
-
-install_bazel_dependencies()
-
-load(
-    "//nodejs:image.bzl",
-    _nodejs_image_repos = "repositories",
-)
-
-_nodejs_image_repos()
 
 # For dockerfile_image rule tests
 load("//contrib:dockerfile_build.bzl", "dockerfile_image")
@@ -395,6 +393,7 @@ register_toolchains(
 
 register_execution_platforms(
     "@local_config_platform//:host",
+    #"//:riscv64-local-linux-gnu", 
     "//platforms:local_container_platform",
 )
 

@@ -14,3 +14,16 @@
 package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
+
+
+filegroup(
+    name = "node_bin",
+    srcs = ["/usr/local/bin/node"],
+    visibility = ["//visibility:public"],
+)
+filegroup(
+    name = "yarn_bin",
+    srcs = ["/usr/local/bin/yarn"],
+    visibility = ["//visibility:public"],
+)
+
